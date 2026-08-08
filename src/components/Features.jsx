@@ -41,24 +41,13 @@ const Features = async () => {
                         </div>
 
                         {/* Card Content Body */}
-                        <div className="p-5 flex flex-col gap-3 flex-1">
+                        <div className="p-5 flex flex-col gap-4 flex-1">
                             <h3 className="text-lg font-bold text-white group-hover:text-green-400 transition-colors line-clamp-1">
                                 {d.facilityName}
                             </h3>
 
                             {/* Location */}
-                            <div className="flex items-center gap-2 text-slate-400 text-sm">
-                                <LocationArrow size={16} className="text-slate-500 shrink-0" />
-                                <span className="line-clamp-1">{d.location}</span>
-                            </div>
 
-                            {/* Price */}
-                            <div className="pt-2 flex items-baseline gap-1 border-t border-slate-800/60 mt-auto">
-                                <span className="text-xl font-extrabold text-green-400">
-                                    ${d.pricePerHour}
-                                </span>
-                                <span className="text-xs text-slate-500 font-normal">/ hour</span>
-                            </div>
                         </div>
 
                         {/* Action Link Button */}

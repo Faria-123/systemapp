@@ -3,3 +3,8 @@ export const getdata = async (get) => {
     const result = await res.json();
     return result;
 }
+export const getdatabyId = async (get) => {
+    const res = await fetch(`http://localhost:8000/allsports/${get}`);
+    const result = await res.json();
+    return result;
+}
