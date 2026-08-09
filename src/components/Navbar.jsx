@@ -58,7 +58,7 @@ const Navbar = () => {
                 {/* Desktop Action Buttons */}
                 <div className="hidden lg:flex items-center gap-3">
                     <Link
-                        href="/login"
+                        href="/signin"
                         className="border border-green-600 text-green-600 hover:bg-green-50 font-semibold px-5 py-2.5 rounded-full transition text-sm"
                     >
                         Sign In
