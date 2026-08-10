@@ -3,8 +3,11 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { ArrowRight, Menu, X } from "lucide-react";
+
+import { authClient } from "@/lib/auth-client";
+import { Avatar, Button } from "@heroui/react";
 
 const navLinks = [
     { label: "Home", href: "/" },
@@ -16,16 +19,39 @@ const navLinks = [
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const pathname = usePathname();
 
-    const toggleMenu = () => setIsOpen((prev) => !prev);
+    const pathname = usePathname();
+    const router = useRouter();
+
+    // Better Auth session
+    const userData = authClient.useSession();
+    const user = userData.data?.user;
+
+    console.log("USER:", user);
+    console.log("IMAGE:", user?.image);
+
+    // Mobile menu
+    const toggleMenu = () => {
+        setIsOpen((prev) => !prev);
+    };
+
+    // Logout
+    const handleout = async () => {
+        await authClient.signOut();
+        setIsOpen(false);
+        router.refresh();
+    };
 
     return (
         <nav className="w-full bg-white shadow-sm sticky top-0 z-50">
             <div className="max-w-7xl mx-auto h-20 md:h-24 px-4 sm:px-6 flex items-center justify-between">
 
-                {/* Logo */}
-                <Link href="/" className="flex items-center">
+                {/* ================= LOGO ================= */}
+                <Link
+                    href="/"
+                    className="flex items-center"
+                    onClick={() => setIsOpen(false)}
+                >
                     <Image
                         src="/logo10.png"
                         alt="Logo"
@@ -36,10 +62,11 @@ const Navbar = () => {
                     />
                 </Link>
 
-                {/* Desktop Navigation */}
+                {/* ================= DESKTOP NAVIGATION ================= */}
                 <div className="hidden lg:flex items-center gap-8 xl:gap-10">
                     {navLinks.map((link) => {
                         const isActive = pathname === link.href;
+
                         return (
                             <Link
                                 key={link.href}
@@ -55,24 +82,53 @@ const Navbar = () => {
                     })}
                 </div>
 
-                {/* Desktop Action Buttons */}
+                {/* ================= DESKTOP USER ACTIONS ================= */}
                 <div className="hidden lg:flex items-center gap-3">
-                    <Link
-                        href="/signin"
-                        className="border border-green-600 text-green-600 hover:bg-green-50 font-semibold px-5 py-2.5 rounded-full transition text-sm"
-                    >
-                        Sign In
-                    </Link>
-                    <Link
-                        href="/register"
-                        className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white font-semibold px-5 py-2.5 rounded-full transition text-sm"
-                    >
-                        Register
-                        <ArrowRight size={16} />
-                    </Link>
+                    {!user ? (
+                        <>
+                            {/* Sign In */}
+                            <Link
+                                href="/signin"
+                                className="border border-green-600 text-green-600 hover:bg-green-50 font-semibold px-5 py-2.5 rounded-full transition text-sm"
+                            >
+                                Sign In
+                            </Link>
+
+                            {/* Register */}
+                            <Link
+                                href="/register"
+                                className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white font-semibold px-5 py-2.5 rounded-full transition text-sm"
+                            >
+                                Register
+                                <ArrowRight size={16} />
+                            </Link>
+                        </>
+                    ) : (
+                        <div className="flex items-center gap-3">
+
+                            {/* Profile Image */}
+                            <Avatar>
+                                <Avatar.Image alt="John Doe" src={user?.image} referrerPolicy="no-referrer" />
+                                <Avatar.Fallback>{user?.name.charAt(0)}</Avatar.Fallback>
+                            </Avatar>
+
+                            {/* User Name */}
+                            <span className="text-sm font-medium text-gray-700">
+                                {user?.name}
+                            </span>
+
+                            {/* Sign Out */}
+                            <Button
+                                variant="danger"
+                                onPress={handleout}
+                            >
+                                Sign Out
+                            </Button>
+                        </div>
+                    )}
                 </div>
 
-                {/* Mobile Menu Button */}
+                {/* ================= MOBILE MENU BUTTON ================= */}
                 <div className="flex lg:hidden">
                     <button
                         onClick={toggleMenu}
@@ -80,17 +136,24 @@ const Navbar = () => {
                         className="text-gray-700 hover:text-green-600 p-2 rounded-md focus:outline-none"
                         aria-label="Toggle navigation menu"
                     >
-                        {isOpen ? <X size={28} /> : <Menu size={28} />}
+                        {isOpen ? (
+                            <X size={28} />
+                        ) : (
+                            <Menu size={28} />
+                        )}
                     </button>
                 </div>
             </div>
 
-            {/* Mobile Navigation Drawer */}
+            {/* ================= MOBILE MENU ================= */}
             {isOpen && (
-                <div className="lg:hidden bg-white border-b border-gray-100 px-6 pt-2 pb-6 flex flex-col gap-4 shadow-lg transition-all">
+                <div className="lg:hidden bg-white border-b border-gray-100 px-6 pt-2 pb-6 flex flex-col gap-4 shadow-lg">
+
+                    {/* Navigation Links */}
                     <div className="flex flex-col gap-3">
                         {navLinks.map((link) => {
                             const isActive = pathname === link.href;
+
                             return (
                                 <Link
                                     key={link.href}
@@ -107,22 +170,56 @@ const Navbar = () => {
                         })}
                     </div>
 
-                    <div className="pt-4 border-t border-gray-100 flex flex-col gap-3">
-                        <Link
-                            href="/login"
-                            onClick={() => setIsOpen(false)}
-                            className="w-full text-center border border-green-600 text-green-600 hover:bg-green-50 font-semibold py-2.5 rounded-full transition"
-                        >
-                            Sign In
-                        </Link>
-                        <Link
-                            href="/register"
-                            onClick={() => setIsOpen(false)}
-                            className="w-full flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white font-semibold py-2.5 rounded-full transition"
-                        >
-                            Register
-                            <ArrowRight size={18} />
-                        </Link>
+                    {/* Mobile User Actions */}
+                    <div className="pt-4 border-t border-gray-100">
+
+                        {!user ? (
+                            <div className="flex flex-col gap-3">
+
+                                {/* Sign In */}
+                                <Link
+                                    href="/signin"
+                                    onClick={() => setIsOpen(false)}
+                                    className="w-full text-center border border-green-600 text-green-600 hover:bg-green-50 font-semibold py-2.5 rounded-full transition"
+                                >
+                                    Sign In
+                                </Link>
+
+                                {/* Register */}
+                                <Link
+                                    href="/register"
+                                    onClick={() => setIsOpen(false)}
+                                    className="w-full flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white font-semibold py-2.5 rounded-full transition"
+                                >
+                                    Register
+                                    <ArrowRight size={18} />
+                                </Link>
+
+                            </div>
+                        ) : (
+                            <div className="flex flex-col items-center gap-3">
+
+                                {/* Profile */}
+                                <Avatar>
+                                    <Avatar.Image alt="John Doe" src={user?.image} referrerPolicy="no-referrer" />
+                                    <Avatar.Fallback>{user?.name.charAt(0)}</Avatar.Fallback>
+                                </Avatar>
+
+                                {/* Name */}
+                                <p className="text-sm font-medium text-gray-700">
+                                    {user?.name}
+                                </p>
+
+                                {/* Sign Out */}
+                                <Button
+                                    variant="danger"
+                                    onPress={handleout}
+                                >
+                                    Sign Out
+                                </Button>
+
+                            </div>
+                        )}
                     </div>
                 </div>
             )}

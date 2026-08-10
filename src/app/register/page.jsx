@@ -15,10 +15,12 @@ import {
     Label,
     TextField,
 } from "@heroui/react";
-import { router } from "better-auth/api";
+// import { router } from "better-auth/api";
 import toast from "react-hot-toast";
-
+import { useRouter } from "next/navigation";
+// import { Router } from "next/router";
 const page = () => {
+    const router = useRouter();
     const handleup = async () => {
         await authClient.signIn.social({
             provider: "google",
@@ -38,22 +40,24 @@ const page = () => {
             email: userData?.email,
             password: userData?.password,
             image: userData?.image,
-            // callbackURL: "/",
+            callbackURL: "/",
 
         });
 
-        if (!result.error) {
-            router.push('/')
+        if (result.error) {
+            toast.error("Failed to sign up!");
+            console.log(result.error);
+            return;
         }
-        else if (result.error) {
-            toast.success('Failed to sign up!');
-        }
+
+        toast.success("Sign up successful!");
+        router.push("/");
     }
     return (
         <Card className="border mx-auto w-125 py-10 mt-5">
             <h1 className="text-center text-2xl font-bold">Sign Up</h1>
 
-            <Form className="flex w-96 mx-auto flex-col gap-4 onSubmit={onSubmit}" >
+            <Form className="flex w-96 mx-auto flex-col gap-4 " onSubmit={onSubmit} >
                 <TextField isRequired name="name" type="text">
                     <Label>Name</Label>
                     <Input placeholder="Enter your name" name="name" />
