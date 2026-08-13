@@ -27,8 +27,8 @@ const Navbar = () => {
     const userData = authClient.useSession();
     const user = userData.data?.user;
 
-    console.log("USER:", user);
-    console.log("IMAGE:", user?.image);
+    // console.log("USER:", user);
+    // console.log("IMAGE:", user?.image);
 
     // Mobile menu
     const toggleMenu = () => {
