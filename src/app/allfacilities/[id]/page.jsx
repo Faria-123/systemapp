@@ -215,7 +215,7 @@ const Page = async ({ params }) => {
 
                     </div>
 
-                    <div className="flex flex-col">
+                    {/* <div className="flex flex-col">
 
                         {d.availableTimeSlots?.map((slot) => (
                             <div
@@ -224,15 +224,27 @@ const Page = async ({ params }) => {
                             >
                                 {slot}
                             </div>
-                        ))}
+                        ))} */}
 
+                    <div className="flex flex-wrap gap-2">
+                        {Array.isArray(d.availableTimeSlots) &&
+                            d.availableTimeSlots.map((slot) => (
+                                <span
+                                    key={slot}
+                                    className="text-sm text-gray-200 bg-slate-800 px-3 py-2 rounded-lg"
+                                >
+                                    {slot}
+                                </span>
+                            ))}
                     </div>
+
+                    {/* </div> */}
 
                 </div>
 
             </div>
 
-            {/* Booking Button */}
+
             <div className="px-5 pb-5">
 
                 <BookButton
@@ -242,7 +254,7 @@ const Page = async ({ params }) => {
 
             </div>
 
-        </div>
+        </div >
     );
 };
 

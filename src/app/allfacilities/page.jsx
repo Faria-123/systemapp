@@ -79,7 +79,7 @@ const page = async () => {
                                             <ArrowRight size={18} />
                                         </Link>
                                     </div>
-                                    <div className="px-5 pb-5 pt-0">
+                                    {/* <div className="px-5 pb-5 pt-0">
                                         <Link
                                             href={``}
                                             className="w-full bg-green-600 hover:bg-green-500 text-white font-semibold py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 shadow-md shadow-green-600/10 transition-all text-sm"
@@ -87,7 +87,7 @@ const page = async () => {
                                             <span>Book Now!</span>
 
                                         </Link>
-                                    </div>
+                                    </div> */}
                                 </div>
 
                             </div>
