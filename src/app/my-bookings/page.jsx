@@ -41,11 +41,14 @@ const page = async () => {
                                     className="text-green-400"
                                 />
                                 <span>Booking Date</span>
+                                <span className="text-gray-200">
+                                    {booking.bookingdate || "Not selected"}
+                                </span>
+
+
                             </div>
 
-                            <span className="text-gray-200">
-                                {booking.bookingDate || "Not selected"}
-                            </span>
+
                         </div>
 
                         {/* Time Slot */}
