@@ -123,14 +123,19 @@ import BookButton from "./BookButton";
 
 const Page = async ({ params }) => {
     const { id } = await params;
-
-    const d = await getdatabyId(id);
+    const { token } = await auth.api.getToken({
+        headers: await headers()
+    });
+    const d = await getdatabyId(id, token);
 
     const userData = await auth.api.getSession({
         headers: await headers(),
     });
 
     const user = userData?.user;
+
+    // console.log(token);
+
 
     return (
         <div className="container m-auto bg-slate-900 border border-slate-800 shadow-xl rounded-2xl">

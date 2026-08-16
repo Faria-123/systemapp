@@ -3,8 +3,12 @@ export const getdata = async (get) => {
     const result = await res.json();
     return result;
 }
-export const getdatabyId = async (get) => {
-    const res = await fetch(`http://localhost:8000/allsports/${get}`);
+export const getdatabyId = async (get, token) => {
+    const res = await fetch(`http://localhost:8000/allsports/${get}`, {
+        headers: {
+            authorization: `Bearer ${token}`
+        }
+    });
     const result = await res.json();
     return result;
 }
