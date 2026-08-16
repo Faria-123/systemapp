@@ -22,6 +22,7 @@ export const config = {
         "/my-bookings",
         "/manage-facilities/:path*",
         "/allfacilities/:path/:path*",
-        "/addfacilities"
+        "/add-facility",
+
     ],
 };
