@@ -5,11 +5,13 @@ import { DateField, Description, Label } from "@heroui/react";
 import { postdata } from "@/app/lib/data";
 import toast from "react-hot-toast";
 import { useState } from "react";
+import { authClient } from "@/lib/auth-client";
 
 const BookButton = ({ user, facility }) => {
     const [loading, setLoading] = useState(false);
     const [bookingDate, setBookingDate] = useState(null);
     const [hours, setHours] = useState("");
+
 
     const totalPrice =
         hours && Number(hours) > 0
@@ -60,8 +62,8 @@ const BookButton = ({ user, facility }) => {
             };
 
             console.log("Booking Data:", bookingData);
-
-            const result = await postdata(bookingData);
+            const { token } = await authClient.token();
+            const result = await postdata(bookingData, token);
 
             console.log(result);
 

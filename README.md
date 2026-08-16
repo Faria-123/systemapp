@@ -1,36 +1,111 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Sports Facility Booking Platform
 
-## Getting Started
+> **Book Your Game. Own The Turf.**
 
-First, run the development server:
+## Project Name
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+**Sports Facility Booking Platform**
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Purpose
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The Sports Facility Booking Platform is a full-stack sports reservation system built using the **MERN Stack** and **Better Auth Authentication**.
 
-## Learn More
+The platform allows users to explore available sports facilities such as football turfs, badminton courts, swimming pools, tennis courts, cricket grounds, basketball courts, and other recreational facilities.
 
-To learn more about Next.js, take a look at the following resources:
+Users can select a facility, choose a specific date and available time slot, and make a booking.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The system also allows authenticated users to add and manage their own sports facilities, while facility owners can update or remove facilities they own.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## Live URL
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**Live Website:**  
+YOUR_LIVE_URL_HERE
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Example:
+
+`https://your-project.vercel.app`
+
+---
+
+## Features
+
+### Browse Sports Facilities
+
+- View all available sports facilities.
+- View facility images, names, locations, prices, and sport types.
+- View detailed information about individual facilities.
+
+### Search & Filter
+
+- Search facilities by facility name.
+- Filter facilities by sport type.
+- Search and filter facilities together.
+- MongoDB `$regex` is used for facility name searching.
+- MongoDB `$in` is used for sport type filtering.
+
+### Authentication
+
+- User registration and login.
+- Better Auth authentication.
+- Google authentication.
+- Protected routes for authenticated users.
+- Authenticated users can access private booking and facility-management features.
+
+### Facility Booking
+
+- Authenticated users can book facilities.
+- Select a booking date.
+- Select available time slots.
+- Store booking information in MongoDB.
+- Prevent duplicate booking of the same facility/time slot.
+- View booking status.
+
+### My Bookings
+
+- View personal bookings.
+- See facility name.
+- See booking date.
+- See selected time slot.
+- See booking price.
+- See booking status.
+- Cancel bookings.
+
+### Add Facility
+
+Logged-in users can add their own facilities.
+
+Facility information includes:
+
+- Facility Name
+- Facility Type
+- Image
+- Location
+- Price Per Hour
+- Capacity
+- Available Time Slots
+- Description
+- Owner Email
+
+### Manage Facilities
+
+Facility owners can:
+
+- View their own facilities.
+- Update their facilities.
+- Remove their facilities.
+- Manage facility information.
+- Manage Booking.
+
+### Responsive Design
+
+- Responsive layout for desktop, tablet, and mobile.
+- Modern sports-focused UI.
+- Facility cards with images and important information.
+- User-friendly navigation and booking interface.
+
+
+

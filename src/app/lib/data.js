@@ -1,12 +1,14 @@
-// export const getdata = async (get) => {
-//     const res = await fetch(`http://localhost:8000/${get}`);
-//     const result = await res.json();
-//     return result;
-// }
+export const getdatato = async (get) => {
+    const res = await fetch(`http://localhost:8000/${get}`);
+    const result = await res.json();
+    return result
+}
 export const getdata = async (
     endpoint,
     search = "",
-    sportType = ""
+    sportType = "",
+
+
 ) => {
     try {
         const params = new URLSearchParams();
@@ -58,7 +60,8 @@ export const postdata = async (data) => {
     const res = await fetch('http://localhost:8000/bookings', {
         method: "POST",
         headers: {
-            "content-type": "application/json"
+            "content-type": "application/json",
+
         },
         body: JSON.stringify(data)
 

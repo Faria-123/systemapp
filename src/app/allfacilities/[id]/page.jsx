@@ -124,7 +124,7 @@ import BookButton from "./BookButton";
 const Page = async ({ params }) => {
     const { id } = await params;
     const { token } = await auth.api.getToken({
-        headers: await headers()
+        headers: await headers(),
     });
     const d = await getdatabyId(id, token);
 
@@ -144,8 +144,8 @@ const Page = async ({ params }) => {
             <div className="relative h-48 sm:h-52 overflow-hidden">
 
                 <Image
-                    src={d.image}
-                    alt={d.facilityName || "Facility Image"}
+                    src={d?.image}
+                    alt={d?.facilityName || "Facility Image"}
                     fill
                     unoptimized
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

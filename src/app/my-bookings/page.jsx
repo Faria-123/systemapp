@@ -12,8 +12,9 @@ const page = async () => {
     });
     const data = userData?.user;
     // console.log(data.id);
+
     const d = await getbook(data.id);
-    console.log(d);
+    // console.log(d);
     return (
         <div >
             {

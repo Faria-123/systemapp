@@ -112,10 +112,20 @@ import {
     StarFill,
 } from "@gravity-ui/icons";
 import Image from "next/image";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
+// import { headers } from "next/headers";
 
 const Page = async ({ searchParams }) => {
 
     const params = await searchParams;
+
+
+
+
+    // const token = tokenResponse?.token;
+    // console.log(token);
+
 
     const search = params?.search || "";
     const sportType = params?.sportType || "";

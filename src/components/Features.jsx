@@ -1,12 +1,19 @@
-import { getdata } from "@/app/lib/data";
+// "use client"
+import { getdatato } from "@/app/lib/data";
 import Link from "next/link";
 // import Image from "next/image";
 import { ArrowRight, LocationArrow, StarFill } from "@gravity-ui/icons";
 import Image from "next/image";
+import { authClient } from "@/lib/auth-client";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 
 const Features = async () => {
-    const data = await getdata('sports');
 
+
+    // const token = tokenResponse?.token;
+    const data = await getdatato('sports');
+    // console.log(token);
     return (
         <section className="max-w-7xl mx-auto px-4 sm:px-6 py-12">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
