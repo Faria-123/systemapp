@@ -1,8 +1,50 @@
-export const getdata = async (get) => {
-    const res = await fetch(`http://localhost:8000/${get}`);
-    const result = await res.json();
-    return result;
-}
+// export const getdata = async (get) => {
+//     const res = await fetch(`http://localhost:8000/${get}`);
+//     const result = await res.json();
+//     return result;
+// }
+export const getdata = async (
+    endpoint,
+    search = "",
+    sportType = ""
+) => {
+    try {
+        const params = new URLSearchParams();
+
+        if (search) {
+            params.append("search", search);
+        }
+
+        if (sportType) {
+            params.append("sportType", sportType);
+        }
+
+        const url = `http://localhost:8000/${endpoint}?${params.toString()}`;
+
+        console.log("FETCHING:", url);
+
+        const res = await fetch(url);
+
+        console.log("STATUS:", res.status);
+
+        if (!res.ok) {
+            const errorText = await res.text();
+
+            console.log("BACKEND ERROR:", errorText);
+
+            throw new Error(
+                `Request failed: ${res.status} ${errorText}`
+            );
+        }
+
+        return await res.json();
+
+    } catch (error) {
+        console.error("getdata error:", error);
+
+        return [];
+    }
+};
 export const getdatabyId = async (get, token) => {
     const res = await fetch(`http://localhost:8000/allsports/${get}`, {
         headers: {

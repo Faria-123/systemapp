@@ -122,7 +122,7 @@ const Navbar = () => {
                                 variant="danger"
                                 onPress={handleout}
                             >
-                                Sign Out
+                                LogOut
                             </Button>
                         </div>
                     )}
