@@ -1,7 +1,9 @@
 import { getdatabyId } from "@/app/lib/data";
+import Spinner from "@/components/Spinner";
 import UpdateFacilityForm from "@/components/UpdateFacilityForm";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
+import { Suspense } from "react";
 // import UpdateFacilityForm from "./UpdateFacilityForm";
 
 const UpdateFacilityPage = async ({ params }) => {
@@ -22,7 +24,10 @@ const UpdateFacilityPage = async ({ params }) => {
                 Update Facility
             </h1>
 
-            <UpdateFacilityForm facility={facility} />
+
+            <Suspense fallback={<Spinner />}>
+                <UpdateFacilityForm facility={facility} />
+            </Suspense>
 
         </div>
     );

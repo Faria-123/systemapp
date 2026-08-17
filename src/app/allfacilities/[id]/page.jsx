@@ -120,6 +120,8 @@ import Image from "next/image";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import BookButton from "./BookButton";
+import Spinner from "@/components/Spinner";
+import { Suspense } from "react";
 
 const Page = async ({ params }) => {
     const { id } = await params;
@@ -252,10 +254,13 @@ const Page = async ({ params }) => {
 
             <div className="px-5 pb-5">
 
-                <BookButton
-                    user={user}
-                    facility={d}
-                />
+
+                <Suspense fallback={<Spinner />}>
+                    <BookButton
+                        user={user}
+                        facility={d}
+                    />
+                </Suspense>
 
             </div>
 
