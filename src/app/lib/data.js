@@ -1,8 +1,17 @@
+
+
+
 export const getdatato = async (get) => {
+
+    // console.log(token);
     const res = await fetch(`http://localhost:8000/${get}`);
     const result = await res.json();
     return result
 }
+
+
+
+
 export const getdata = async (
     endpoint,
     search = "",
@@ -69,8 +78,13 @@ export const postdata = async (data) => {
     const dat = await res.json();
     return dat;
 }
-export const getbook = async (get) => {
-    const res = await fetch(`http://localhost:8000/bookings/${get}`);
+export const getbook = async (get, token) => {
+
+    const res = await fetch(`http://localhost:8000/bookings/${get}`, {
+        headers: {
+            authorization: `Bearer ${token}`
+        }
+    });
     const result = await res.json();
     return result;
 }

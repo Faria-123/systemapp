@@ -1,12 +1,10 @@
-// "use client"
+
 import { getdatato } from "@/app/lib/data";
 import Link from "next/link";
-// import Image from "next/image";
+
 import { ArrowRight, LocationArrow, StarFill } from "@gravity-ui/icons";
 import Image from "next/image";
-import { authClient } from "@/lib/auth-client";
-import { auth } from "@/lib/auth";
-import { headers } from "next/headers";
+
 
 const Features = async () => {
 

@@ -12,8 +12,12 @@ const page = async () => {
     });
     const data = userData?.user;
     // console.log(data.id);
+    const { token } = await auth.api.getToken({
+        headers: await headers(),
+    });
+    // console.log(token);
 
-    const d = await getbook(data.id);
+    const d = await getbook(data.id, token);
     // console.log(d);
     return (
         <div >

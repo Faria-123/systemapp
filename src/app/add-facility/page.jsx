@@ -1,6 +1,7 @@
 //
 "use client";
 
+// import { auth } from "@/lib/auth";
 import { authClient } from "@/lib/auth-client";
 import {
     Button,
@@ -10,11 +11,15 @@ import {
     TextField,
     TextArea,
 } from "@heroui/react";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 const Page = () => {
+    const router = useRouter();
     const [isPending, setIsPending] = useState(false);
     const { data: session } = authClient.useSession();
+
     const onSubmit = async (e) => {
         e.preventDefault();
 
@@ -41,12 +46,12 @@ const Page = () => {
                 ownerEmail: session?.user?.email,
             };
 
-            console.log("Sending:", facility);
 
             const req = await fetch("http://localhost:8000/sports", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
+                    // Authorization: `Bearer ${token}`,
                 },
                 body: JSON.stringify(facility),
             });
@@ -62,6 +67,9 @@ const Page = () => {
             }
 
             console.log("Facility added successfully");
+            // redirect('/');
+            toast.success("added Facility!")
+            router.push("/");
 
             // e.currentTarget.reset();
 

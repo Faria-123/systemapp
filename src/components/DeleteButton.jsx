@@ -1,5 +1,8 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
+// import { auth } from "@/lib/auth";
+// import { headers } from "next/headers";
 import { useState } from "react";
 
 const DeleteButton = ({ id }) => {
@@ -18,17 +21,24 @@ const DeleteButton = ({ id }) => {
 
             setIsPending(true);
 
+            const { data, error } = await authClient.token()
+
+            const token = data?.token;
+            console.log(token)
             const response = await fetch(
                 `http://localhost:8000/sports/${id}`,
                 {
                     method: "DELETE",
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
                 }
             );
 
-            const data = await response.json();
+            const dataa = await response.json();
 
             if (!response.ok) {
-                throw new Error(data.message);
+                throw new Error(dataa.message);
             }
 
             // Refresh server component

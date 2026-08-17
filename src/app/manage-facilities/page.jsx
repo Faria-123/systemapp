@@ -42,11 +42,18 @@ const ManageFacilities = async () => {
             </div>
         );
     }
+    const tokenData = await auth.api.getToken({
+        headers: await headers(),
+    });
 
+    const token = tokenData?.token;
     // Get facilities owned by this user
     const response = await fetch(
         `http://localhost:8000/myfacilities/${user.email}`,
         {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
             cache: "no-store",
         }
     );

@@ -9,6 +9,7 @@ import {
     TextField,
     TextArea
 } from "@heroui/react";
+import { authClient } from "@/lib/auth-client";
 
 const UpdateFacilityForm = ({ facility }) => {
 
@@ -48,7 +49,8 @@ const UpdateFacilityForm = ({ facility }) => {
                 // Keep owner
                 ownerEmail: facility.ownerEmail,
             };
-
+            const { data, error } = await authClient.token();
+            const token = data?.token;
             const response = await fetch(
                 `http://localhost:8000/sports/${facility._id}`,
                 {
@@ -56,17 +58,18 @@ const UpdateFacilityForm = ({ facility }) => {
 
                     headers: {
                         "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`,
                     },
 
                     body: JSON.stringify(updatedFacility),
                 }
             );
 
-            const data = await response.json();
+            const dataa = await response.json();
 
             if (!response.ok) {
                 throw new Error(
-                    data.message || "Update failed"
+                    dataa.message || "Update failed"
                 );
             }
 
@@ -88,7 +91,7 @@ const UpdateFacilityForm = ({ facility }) => {
     return (
         <form
             onSubmit={handleSubmit}
-            className="bg-slate-900 p-6 rounded-2xl space-y-6"
+            className="bg-slate-900 p-6 rounded-2xl space-y-6 "
         >
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -99,7 +102,7 @@ const UpdateFacilityForm = ({ facility }) => {
                     isRequired
                     defaultValue={facility.facilityName}
                 >
-                    <Label>Facility Name</Label>
+                    <Label className="text-white">Facility Name</Label>
 
                     <Input />
 
@@ -113,7 +116,7 @@ const UpdateFacilityForm = ({ facility }) => {
                     isRequired
                     defaultValue={facility.facilityType}
                 >
-                    <Label>Facility Type</Label>
+                    <Label className="text-white">Facility Type</Label>
 
                     <Input />
 
@@ -129,7 +132,7 @@ const UpdateFacilityForm = ({ facility }) => {
                         isRequired
                         defaultValue={facility.image}
                     >
-                        <Label>Image URL</Label>
+                        <Label className="text-white">Image URL</Label>
 
                         <Input type="url" />
 
@@ -145,7 +148,7 @@ const UpdateFacilityForm = ({ facility }) => {
                     isRequired
                     defaultValue={facility.location}
                 >
-                    <Label>Location</Label>
+                    <Label className="text-white">Location</Label>
 
                     <Input />
 
@@ -161,7 +164,7 @@ const UpdateFacilityForm = ({ facility }) => {
                         facility.pricePerHour
                     )}
                 >
-                    <Label>Price Per Hour</Label>
+                    <Label className="text-white">Price Per Hour</Label>
 
                     <Input type="number" />
 
@@ -177,7 +180,7 @@ const UpdateFacilityForm = ({ facility }) => {
                         facility.capacity
                     )}
                 >
-                    <Label>Capacity</Label>
+                    <Label className="text-white">Capacity</Label>
 
                     <Input type="number" />
 
@@ -199,7 +202,7 @@ const UpdateFacilityForm = ({ facility }) => {
                                 : ""
                         }
                     >
-                        <Label>
+                        <Label className="text-white">
                             Available Time Slots
                         </Label>
 
@@ -221,7 +224,7 @@ const UpdateFacilityForm = ({ facility }) => {
                         isRequired
                         defaultValue={facility.description}
                     >
-                        <Label>Description</Label>
+                        <Label className="text-white">Description</Label>
 
                         <TextArea />
 
