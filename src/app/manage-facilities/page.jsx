@@ -49,7 +49,7 @@ const ManageFacilities = async () => {
     const token = tokenData?.token;
     // Get facilities owned by this user
     const response = await fetch(
-        `http://localhost:8000/myfacilities/${user.email}`,
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/myfacilities/${user.email}`,
         {
             headers: {
                 Authorization: `Bearer ${token}`,

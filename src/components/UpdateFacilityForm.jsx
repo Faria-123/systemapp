@@ -52,7 +52,7 @@ const UpdateFacilityForm = ({ facility }) => {
             const { data, error } = await authClient.token();
             const token = data?.token;
             const response = await fetch(
-                `http://localhost:8000/sports/${facility._id}`,
+                `${process.env.NEXT_PUBLIC_SERVER_URL}/sports/${facility._id}`,
                 {
                     method: "PATCH",
 

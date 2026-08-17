@@ -47,7 +47,7 @@ const Page = () => {
             };
 
 
-            const req = await fetch("http://localhost:8000/sports", {
+            const req = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/sports`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

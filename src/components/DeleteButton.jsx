@@ -26,7 +26,7 @@ const DeleteButton = ({ id }) => {
             const token = data?.token;
             console.log(token)
             const response = await fetch(
-                `http://localhost:8000/sports/${id}`,
+                `${process.env.NEXT_PUBLIC_SERVER_URL}/sports/${id}`,
                 {
                     method: "DELETE",
                     headers: {

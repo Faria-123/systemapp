@@ -4,7 +4,7 @@
 export const getdatato = async (get) => {
 
     // console.log(token);
-    const res = await fetch(`http://localhost:8000/${get}`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/${get}`);
     const result = await res.json();
     return result
 }
@@ -30,7 +30,7 @@ export const getdata = async (
             params.append("sportType", sportType);
         }
 
-        const url = `http://localhost:8000/${endpoint}?${params.toString()}`;
+        const url = `${process.env.NEXT_PUBLIC_SERVER_URL}/${endpoint}?${params.toString()}`;
 
         console.log("FETCHING:", url);
 
@@ -57,7 +57,7 @@ export const getdata = async (
     }
 };
 export const getdatabyId = async (get, token) => {
-    const res = await fetch(`http://localhost:8000/allsports/${get}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/allsports/${get}`, {
         headers: {
             authorization: `Bearer ${token}`
         }
@@ -66,7 +66,7 @@ export const getdatabyId = async (get, token) => {
     return result;
 }
 export const postdata = async (data) => {
-    const res = await fetch('http://localhost:8000/bookings', {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/bookings`, {
         method: "POST",
         headers: {
             "content-type": "application/json",
@@ -80,7 +80,7 @@ export const postdata = async (data) => {
 }
 export const getbook = async (get, token) => {
 
-    const res = await fetch(`http://localhost:8000/bookings/${get}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/bookings/${get}`, {
         headers: {
             authorization: `Bearer ${token}`
         }
